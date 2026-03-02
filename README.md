@@ -7,12 +7,12 @@ Tools used in this project
 
 Jenkins automation server  
 Docker container platform  
-Source code hosted on :contentReference[oaicite:0]{index=0}  
+Source code hosted on GitHub  
 
 Core platforms
 
-:contentReference[oaicite:1]{index=1}  
-:contentReference[oaicite:2]{index=2}  
+Jenkins  
+Docker  
 
 ---
 
@@ -46,93 +46,64 @@ The Docker container is started using the newly built image
 
 ### Jenkins dashboard
 
-This screenshot shows the Jenkins home dashboard where all jobs and pipelines are visible.
+This screenshot shows the Jenkins home dashboard where the created pipeline job is visible.
+It confirms that Jenkins is running correctly and the CI/CD project is configured on the server.
 
 ![Jenkins Dashboard](screenshots/01-jenkins-dashboard.png)
 
 ---
 
-### Jenkins job configuration
+### Pipeline configuration
 
-This screenshot shows the job configuration page where source code repository and build steps are defined.
+This screenshot shows the pipeline job configuration page.
+It includes the GitHub repository details and the pipeline definition used to build and deploy the application using Docker.
 
-![Jenkins Job Configuration](screenshots/02-jenkins-job-configuration.png)
-
----
-
-### GitHub repository integration
-
-This screenshot shows the GitHub repository connected with the Jenkins job.
-
-This is used to fetch the source code for every build.
-
-![GitHub Integration](screenshots/03-github-integration.png)
+![Pipeline Configuration](screenshots/02-pipeline-configuration.png)
 
 ---
 
-### Webhook configuration in GitHub
+### Pipeline stage view
 
-This screenshot shows the webhook configuration used to automatically trigger Jenkins whenever new code is pushed.
+This screenshot shows the stage view of the Jenkins pipeline.
+Each stage represents an important step such as source code checkout, build, Docker image creation and container deployment.
 
-![GitHub Webhook](screenshots/04-github-webhook.png)
-
----
-
-### Jenkins build started after code push
-
-This screenshot confirms that the Jenkins pipeline starts automatically after a new commit is pushed to GitHub.
-
-![Build Triggered](screenshots/05-build-triggered.png)
+![Pipeline Stage View](screenshots/03-pipeline-stage-view.png)
 
 ---
 
-### Jenkins console output
+### Build console output
 
-This screenshot shows the live console output of the pipeline execution.
+This screenshot shows the live console output of a pipeline execution.
+It confirms that the code is pulled from GitHub, the Docker image is built successfully and the container is started without errors.
 
-It includes code checkout, build steps and Docker commands.
-
-![Console Output](screenshots/06-jenkins-console-output.png)
-
----
-
-### Docker image build process
-
-This screenshot shows the Docker image being built as part of the Jenkins pipeline.
-
-![Docker Build](screenshots/07-docker-build.png)
+![Build Console Output](screenshots/04-build-console-output.png)
 
 ---
 
-### Docker images list
+### Docker container running
 
-This screenshot shows the newly created Docker image available on the server.
+This screenshot shows the running Docker container on the server.
+It verifies that the application container is active and running from the newly built image.
 
-![Docker Images](screenshots/08-docker-images.png)
-
----
-
-### Running Docker container
-
-This screenshot shows the application running inside a Docker container.
-
-![Docker Container Running](screenshots/09-docker-container-running.png)
+![Docker Container Running](screenshots/05-docker-container-running.png)
 
 ---
 
-### Application output in browser
+### Application running in browser
 
-This screenshot shows the deployed application accessed through the browser after successful pipeline execution.
+This screenshot shows the deployed application opened in a web browser.
+It confirms that the application is accessible through the server public IP and exposed port.
 
-![Application Output](screenshots/10-application-browser-output.png)
+![Application Running](screenshots/06-application-running.png)
 
 ---
 
-### Successful pipeline completion
+### GitHub repository
 
-This screenshot shows the final successful status of the Jenkins pipeline.
+This screenshot shows the GitHub repository that contains the application source code and Dockerfile.
+This repository is connected to Jenkins and is used as the trigger source for the CI/CD pipeline.
 
-![Pipeline Success](screenshots/11-pipeline-success.png)
+![GitHub Repository](screenshots/07-github-repository.png)
 
 ---
 
@@ -140,15 +111,15 @@ This screenshot shows the final successful status of the Jenkins pipeline.
 
 A developer pushes the latest code to the GitHub repository.
 
-GitHub webhook notifies Jenkins and triggers the pipeline.
+Jenkins automatically triggers the pipeline.
 
-Jenkins pulls the latest source code from the repository.
+Jenkins pulls the latest source code.
 
 The application build process is executed.
 
 A Docker image is created using the Dockerfile.
 
-The old container is stopped if it exists.
+If an old container is running, it is removed.
 
 A new container is started using the latest Docker image.
 
@@ -158,21 +129,21 @@ The updated application becomes available automatically.
 
 ## Deployment approach
 
-The deployment is container based.
+The deployment is completely container based.
 
-Each new build creates a fresh Docker image.
+Each pipeline run creates a fresh Docker image.
 
-The application is always deployed using the latest image generated by the pipeline.
+The application is always deployed using the latest image generated by Jenkins.
 
-This ensures consistency between builds and deployments.
+This ensures consistent and repeatable deployments.
 
 ---
 
 ## Resume ready description
 
 Designed and implemented an automated CI CD pipeline using Jenkins and Docker.
-Integrated GitHub with Jenkins using webhooks to trigger builds automatically.
-Containerized the application and deployed it using Docker for faster and reliable delivery.
+Configured a Jenkins pipeline connected with a GitHub repository to trigger builds automatically.
+Built Docker images and deployed application containers as part of the pipeline to enable fast and reliable delivery.
 
 ---
 
