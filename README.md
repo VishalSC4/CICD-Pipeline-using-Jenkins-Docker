@@ -1,41 +1,181 @@
-# CI/CD Pipeline using Jenkins & Docker
+# CI/CD Pipeline using Jenkins and Docker
 
-## Project Overview
+This project demonstrates a complete Continuous Integration and Continuous Deployment pipeline using Jenkins and Docker.
+The main goal of this project is to automatically build, test, containerize and deploy an application whenever new code is pushed to the repository.
 
-This project demonstrates how a simple web application can be automatically built and deployed using a CI/CD pipeline.  
-Whenever code is pushed to the GitHub repository, Jenkins automatically pulls the latest code, builds a Docker image and runs the application inside a container on an AWS EC2 instance.
+Tools used in this project
 
-The objective of this project is to understand real-world DevOps practices such as automated builds, containerization and continuous deployment.
+Jenkins automation server  
+Docker container platform  
+Source code hosted on :contentReference[oaicite:0]{index=0}  
 
----
+Core platforms
 
-## Technologies Used
-
-Jenkins for pipeline automation  
-Docker for containerization  
-Git and GitHub for source code management  
-AWS EC2 Amazon Linux instance as the build and deployment server  
-Nginx as the web server inside the Docker container
+:contentReference[oaicite:1]{index=1}  
+:contentReference[oaicite:2]{index=2}  
 
 ---
 
-## How the Pipeline Works
+## Project summary
 
-The pipeline performs the following steps automatically.
+This project implements a fully automated CI/CD pipeline.
 
-First, Jenkins connects to the GitHub repository and checks out the latest code.  
-Next, a Docker image is built using the Dockerfile present in the repository.  
-After that, any previously running container of the same application is removed.  
-Finally, a new container is started and the application becomes available to users.
+Whenever a developer pushes code to the repository, Jenkins automatically triggers the pipeline.
+The pipeline pulls the latest code, builds the application, creates a Docker image and runs the application inside a container.
 
----
-
-## Application Access
-
-After a successful pipeline execution, the application can be accessed from a browser using
-
-http://<EC2-PUBLIC-IP>:8090
+This setup reduces manual work and ensures faster and more reliable deployments.
 
 ---
 
-## Repository Structure
+## Architecture overview
+
+The pipeline consists of the following flow
+
+Developer pushes code to GitHub  
+Jenkins detects the change and starts the pipeline  
+Jenkins pulls the latest source code  
+Application is built inside Jenkins  
+A Docker image is created from the application  
+The Docker container is started using the newly built image  
+
+---
+
+## Screenshots and explanation
+
+---
+
+### Jenkins dashboard
+
+This screenshot shows the Jenkins home dashboard where all jobs and pipelines are visible.
+
+![Jenkins Dashboard](screenshots/01-jenkins-dashboard.png)
+
+---
+
+### Jenkins job configuration
+
+This screenshot shows the job configuration page where source code repository and build steps are defined.
+
+![Jenkins Job Configuration](screenshots/02-jenkins-job-configuration.png)
+
+---
+
+### GitHub repository integration
+
+This screenshot shows the GitHub repository connected with the Jenkins job.
+
+This is used to fetch the source code for every build.
+
+![GitHub Integration](screenshots/03-github-integration.png)
+
+---
+
+### Webhook configuration in GitHub
+
+This screenshot shows the webhook configuration used to automatically trigger Jenkins whenever new code is pushed.
+
+![GitHub Webhook](screenshots/04-github-webhook.png)
+
+---
+
+### Jenkins build started after code push
+
+This screenshot confirms that the Jenkins pipeline starts automatically after a new commit is pushed to GitHub.
+
+![Build Triggered](screenshots/05-build-triggered.png)
+
+---
+
+### Jenkins console output
+
+This screenshot shows the live console output of the pipeline execution.
+
+It includes code checkout, build steps and Docker commands.
+
+![Console Output](screenshots/06-jenkins-console-output.png)
+
+---
+
+### Docker image build process
+
+This screenshot shows the Docker image being built as part of the Jenkins pipeline.
+
+![Docker Build](screenshots/07-docker-build.png)
+
+---
+
+### Docker images list
+
+This screenshot shows the newly created Docker image available on the server.
+
+![Docker Images](screenshots/08-docker-images.png)
+
+---
+
+### Running Docker container
+
+This screenshot shows the application running inside a Docker container.
+
+![Docker Container Running](screenshots/09-docker-container-running.png)
+
+---
+
+### Application output in browser
+
+This screenshot shows the deployed application accessed through the browser after successful pipeline execution.
+
+![Application Output](screenshots/10-application-browser-output.png)
+
+---
+
+### Successful pipeline completion
+
+This screenshot shows the final successful status of the Jenkins pipeline.
+
+![Pipeline Success](screenshots/11-pipeline-success.png)
+
+---
+
+## CI CD workflow
+
+A developer pushes the latest code to the GitHub repository.
+
+GitHub webhook notifies Jenkins and triggers the pipeline.
+
+Jenkins pulls the latest source code from the repository.
+
+The application build process is executed.
+
+A Docker image is created using the Dockerfile.
+
+The old container is stopped if it exists.
+
+A new container is started using the latest Docker image.
+
+The updated application becomes available automatically.
+
+---
+
+## Deployment approach
+
+The deployment is container based.
+
+Each new build creates a fresh Docker image.
+
+The application is always deployed using the latest image generated by the pipeline.
+
+This ensures consistency between builds and deployments.
+
+---
+
+## Resume ready description
+
+Designed and implemented an automated CI CD pipeline using Jenkins and Docker.
+Integrated GitHub with Jenkins using webhooks to trigger builds automatically.
+Containerized the application and deployed it using Docker for faster and reliable delivery.
+
+---
+
+## Author
+
+Vishal Chavan
