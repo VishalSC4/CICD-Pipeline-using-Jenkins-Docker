@@ -1,0 +1,67 @@
+# Update server
+sudo yum update -y
+
+
+# Install Git
+sudo yum install git -y
+
+
+# Install Docker
+sudo yum install docker -y
+
+
+# Start Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+
+
+# Allow Jenkins user to use Docker
+sudo usermod -aG docker jenkins
+
+
+# Restart Jenkins so it can access Docker
+sudo systemctl restart jenkins
+
+
+# Login again to refresh permissions
+exit
+
+
+# (Login again using SSH after exit)
+
+
+# Verify tools
+git --version
+docker --version
+
+
+# Go to Jenkins workspace (this is where Jenkins builds)
+cd /var/lib/jenkins/workspace
+
+
+# (Jenkins itself will clone automatically during pipeline)
+# This command is only for manual verification if needed
+git clone https://github.com/VishalSC4/incident-recovery-cicd.git
+
+
+# Go inside project folder
+cd incident-recovery-cicd
+
+
+# Build Docker image
+docker build -t incident-recovery-app .
+
+
+# Stop old container if running
+docker rm -f incident-recovery-app
+
+
+# Run container
+docker run -d --name incident-recovery-app -p 8090:80 incident-recovery-app
+
+
+# Verify running container
+docker ps
+
+Final Output to check application:
+http://<EC2-Public-IP>:8090
